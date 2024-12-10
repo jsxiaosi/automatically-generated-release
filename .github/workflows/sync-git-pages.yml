@@ -30,6 +30,9 @@ jobs:
       - name: Fetch git-pages branch
         run: git fetch origin git-page:git-page
 
+      - name: Checkout git-page branch
+        run: git checkout git-page
+
       - name: Merge main into git-pages
         run: git merge main --no-ff -m "feat:Auto-merge main into git-pages"
           
