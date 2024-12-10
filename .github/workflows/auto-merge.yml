@@ -38,3 +38,9 @@ jobs:
           
       - name: Push changes to git-pages
         run: git push origin git-pages
+        
+      - name: Trigger deploy workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          event-type: deploy
