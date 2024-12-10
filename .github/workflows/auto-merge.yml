@@ -44,4 +44,4 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           repository: username/my-repo
-          event-type: my-event
+          event-type: git-pages-deploy
