@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [closed]
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     if: github.event.pull_request.merged == true || github.event_name == 'push'
@@ -42,6 +45,5 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.PAT }}
           repository: username/my-repo
           event-type: git-pages-deploy
