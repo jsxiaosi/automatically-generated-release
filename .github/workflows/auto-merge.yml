@@ -45,5 +45,4 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
-          repository: username/my-repo
-          event-type: git_pages_deploy
+          event-type: git-pages-deploy
