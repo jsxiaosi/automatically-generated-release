@@ -1,4 +1,4 @@
-name: Sync main to git-page
+name: Sync main to git-pages
 
 on:
   push:
@@ -23,17 +23,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Add git-page remote
+      - name: Add git-pages remote
         run: |
-          git remote add git-page https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git remote add git-pages https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-      - name: Fetch git-page branch
-        run: git fetch git-page git-page
+      - name: Fetch git-pages branch
+        run: git fetch git-pages git-pages
 
-      - name: Merge main into git-page
+      - name: Merge main into git-pages
         run: |
-          git checkout git-page
-          git merge main --no-ff -m "Auto-merge main into git-page"
+          git checkout git-pages
+          git merge main --no-ff -m "Auto-merge main into git-pages"
 
-      - name: Push changes to git-page
-        run: git push git-page git-page
+      - name: Push changes to git-pages
+        run: git push git-pages git-pages
