@@ -1,4 +1,4 @@
-name: Sync main to git-pages
+name: Auto merge main into git-pages
 
 on:
   push:
