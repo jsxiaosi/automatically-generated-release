@@ -28,10 +28,10 @@ jobs:
           git remote add git-pages https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Fetch git-pages branch
-        run: git fetch origin git-page:git-page
+        run: git fetch origin git-pages:git-pages
 
       - name: Checkout git-page branch
-        run: git checkout git-page
+        run: git checkout git-pages
 
       - name: Merge main into git-pages
         run: git merge main --no-ff -m "feat:Auto-merge main into git-pages"
