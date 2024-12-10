@@ -1,22 +1,39 @@
-name: Sync multiple branches
+name: Sync main to git-page
+
 on:
   push:
     branches:
-      - 'main'
-
-permissions:
-  id-token: write
+      - main
+  pull_request:
+    types: [closed]
 
 jobs:
-  sync-branch:
+  sync:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
 
-      - name: Merge main -> git-pages
-        uses: devmasx/merge-branch@1.4.0
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
         with:
-          type: now
-          from_branch: main
-          target_branch: git-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add git-page remote
+        run: |
+          git remote add git-page https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Fetch git-page branch
+        run: git fetch git-page git-page
+
+      - name: Merge main into git-page
+        run: |
+          git checkout git-page
+          git merge main --no-ff -m "Auto-merge main into git-page"
+
+      - name: Push changes to git-page
+        run: git push git-page git-page
