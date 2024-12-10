@@ -5,7 +5,7 @@ on:
     branches:
       - git-pages
   repository_dispatch:
-    types: [git-pages-deploy]
+    types: [git_pages_deploy]
 
 jobs:
   build:
